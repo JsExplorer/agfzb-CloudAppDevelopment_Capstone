@@ -9,8 +9,8 @@ import time
  
 
 def analyze_review_sentiments(text):
-    url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/e9cf117d-4cf6-40df-ac58-7c43b602839f"
-    api_key = "dpPjzoKlkcqjL723aG5j5E8dLogKttjrnmSEi1B43zBA"
+    url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/b3e41192-1cf4-4e60-bfa0-28d4c25800c8"
+    api_key = "TxOPysJNogaETEXbR7N3UMGwLB2Xlqx0LE6LxK4B2nHc"
     authenticator = IAMAuthenticator(api_key)
     natural_language_understanding = NaturalLanguageUnderstandingV1(version='2021-08-01',authenticator=authenticator)
     natural_language_understanding.set_service_url(url)
@@ -32,7 +32,7 @@ def get_dealers_from_cf(url, **kwargs):
 
     if json_result:
         # Get the row list in JSON as dealers
-        dealers = json_result["rows"]
+        dealers = json_result["body"]["rows"]
         # For each dealer object
         for dealer in dealers:
             # Get its content in `doc` object

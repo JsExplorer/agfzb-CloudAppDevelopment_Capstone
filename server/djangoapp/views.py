@@ -73,7 +73,7 @@ def registration_request(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://2e451fd6-2a4c-4440-a3d1-6e60a8a2325a-bluemix.cloudantnosqldb.appdomain.cloud/api/dealership"
+        url = "https://50be70b1.us-south.apigw.appdomain.cloud/api/dealership"
         dealerships = get_dealers_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
@@ -81,11 +81,11 @@ def get_dealerships(request):
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "https://2e451fd6-2a4c-4440-a3d1-6e60a8a2325a-bluemix.cloudantnosqldb.appdomain.cloud/api/dealership"
+        dealer_url = "https://50be70b1.us-south.apigw.appdomain.cloud/api/dealership"
         dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
-        review_url = "https://2e451fd6-2a4c-4440-a3d1-6e60a8a2325a-bluemix.cloudantnosqldb.appdomain.cloud/api/review"
+        review_url = "https://50be70b1.us-south.apigw.appdomain.cloud/apii/review"
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
@@ -94,7 +94,7 @@ def get_dealer_details(request, id):
 
 def add_review(request, id):
     context = {}
-    dealer_url = "https://2e451fd6-2a4c-4440-a3d1-6e60a8a2325a-bluemix.cloudantnosqldb.appdomain.cloud/api/dealership"
+    dealer_url = "https://50be70b1.us-south.apigw.appdomain.cloud/api/dealership"
     dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
@@ -127,6 +127,6 @@ def add_review(request, id):
 
             new_payload = {}
             new_payload["review"] = payload
-            review_post_url = "https://2e451fd6-2a4c-4440-a3d1-6e60a8a2325a-bluemix.cloudantnosqldb.appdomain.cloud/api/review"
+            review_post_url = "https://50be70b1.us-south.apigw.appdomain.cloud/api/review"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
